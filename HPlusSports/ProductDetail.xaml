@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:design="clr-namespace:HPlusSports.Design;assembly:HPlusSports"
+             BindingContext="{x:Static design:ProductModel.Product}"
+             x:Class="HPlusSports.ProductDetail">
+    <ContentPage.Content>
+        <ScrollView Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                    >
+        <StackLayout Orientation="Vertical" Padding="10,20">
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Name:"></Label>
+                <Label Text="{Binding Path=Name}"></Label>
+            </StackLayout>
+
+             <StackLayout Orientation="Vertical">
+                <Label Text="Description:"></Label>
+                <Label Text="{Binding Description}"></Label>
+            </StackLayout>
+
+            <Image Source="{Binding Path=ImageUri}" Aspect="AspectFit" HorizontalOptions="FillAndExpand"
+                   VerticalOptions="Start"></Image>
+            <RelativeLayout HorizontalOptions="FillAndExpand" VerticalOptions="Start">
+                <Button Text="Order" x:Name="orderBtn"
+                        Clicked="Handle_Click"
+                        RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width,Factor=.25}"
+                        ></Button>
+                <Button Text="Favorite"
+                        RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToView, ElementName=orderBtn, Property=X, Constant=100}"
+                        ></Button>
+            </RelativeLayout>
+        </StackLayout>
+
+            </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
