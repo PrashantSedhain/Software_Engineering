@@ -23,6 +23,8 @@ namespace HPlusSports
             Order o = BindingContext as Order;
 
             DisplayAlert("Order Placed", $"Order placed for {o.Quantity} of {o.ProductName}", "OK");
+
+            Navigation.PopToRootAsync();
         }
     }
 }
