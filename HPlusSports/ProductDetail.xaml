@@ -11,13 +11,14 @@
             <StackLayout Orientation="Vertical" Padding="10,20">
                 <Image Source="{Binding Path=ImageUri}" Aspect="AspectFit" HorizontalOptions="FillAndExpand" VerticalOptions="Start"></Image>
                 <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="Start" Orientation="Horizontal">
-                    <Button Text="Order" x:Name="orderBtn"
-                            Clicked="Handle_Click"
+                    <Button Text="Order"
+                            x:Name="orderBtn"
+                            Clicked="HandleOrderClick"
                             HorizontalOptions="FillAndExpand"
-                            RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width,Factor=.25}"
                             ></Button>
                     <Button Text="Favorite"
-                            RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToView, ElementName=orderBtn, Property=X, Constant=100}"
+                            x:Name="favoriteBtn"
+                            Clicked="HandleFavoriteClick"
                             ></Button>
                 </StackLayout>
                 <StackLayout Orientation="Vertical">
