@@ -5,7 +5,7 @@
             <Style TargetType="Entry">
                 <Style.Triggers>
                     <Trigger TargetType="Entry" Value="0" Property="Text">
-                          <Setter Property="BackgroundColor" Value="Red"></Setter>
+                        <Setter Property="BackgroundColor" Value="Red"></Setter>
                     </Trigger>
                 </Style.Triggers>
 
@@ -15,33 +15,21 @@
             </Style>
         </ResourceDictionary>
     </TabbedPage.Resources>
+
     <TabbedPage.Children>
         <ContentPage Title="Order">
-            <Grid Padding="10,20" VerticalOptions="Start">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*"></ColumnDefinition>
-                    <ColumnDefinition Width="2*"></ColumnDefinition>
-                    <ColumnDefinition Width="1*"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-
-                <Label Text="Product Name:" Style="{x:StaticResource Key=fancyText}" ></Label>
-                <Label Text="{Binding Path=ProductName}" Grid.Column="1" Grid.ColumnSpan="2"></Label>
-
-                <Label Text="Quantity:" Grid.Row="1"></Label>
-                <Entry Text="{Binding Path=Quantity,Mode=TwoWay}" Keyboard="Numeric" Grid.Column="1" Grid.Row="1"></Entry>
-                <Stepper Value="{Binding Path=Quantity,Mode=TwoWay}" Grid.Column="2" Grid.Row="1"></Stepper>
-
-                <Button Text="Order" Clicked="Handle_Clicked" Grid.Row="2" Grid.ColumnSpan="3" HorizontalOptions="Center"></Button>
-            </Grid>
+            <StackLayout Orientation="Vertical" Padding="10,20" VerticalOptions="Start">
+                <Label Text="{Binding Path=ProductName}" FontSize="Large"></Label>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Quantity:" VerticalOptions="Center"></Label>
+                    <Entry Text="{Binding Path=Quantity,Mode=TwoWay}" Placeholder="Quantity" Keyboard="Numeric" HorizontalOptions="FillAndExpand"></Entry>
+                    <Stepper Value="{Binding Path=Quantity,Mode=TwoWay}" Minimum="1"></Stepper>
+                </StackLayout>
+                <Button Text="Order" Clicked="Handle_Clicked" HorizontalOptions="FillAndExpand"></Button>
+            </StackLayout>
         </ContentPage>
         <ContentPage Title="History">
-
+            
         </ContentPage>
     </TabbedPage.Children>
 </TabbedPage>
