@@ -5,15 +5,16 @@ using System.IO;
 using System.Net.Http;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
+using System.Diagnostics;
+using Xamarin.Forms;
 
 namespace HPlusSports.Services
 {
 	public static class ProductService
     {
-        private const string WISHLIST_FILE = "wishlist.json";
-		static HttpClient client;
+        static HttpClient client;
 
-        public static List<Product> WishList
+        public static List<int> WishList
         {
             get;
             set;
@@ -23,6 +24,7 @@ namespace HPlusSports.Services
 		{
 			client = new HttpClient();
 			client.BaseAddress = new Uri("https://hplussport.com/api/");
+            WishList = new List<int>();
 
 		}
 
@@ -47,13 +49,14 @@ namespace HPlusSports.Services
         {
             if (WishList != null && WishList.Count > 0)
             {
-                //Save Products to Wish List
+                Application.Current.Properties["wishlist"] = JsonConvert.SerializeObject(WishList); ;
+                await Application.Current.SavePropertiesAsync();
             }
         }
 
         public static async Task LoadWishList()
         {
-            //Load items from wish list
+            WishList = JsonConvert.DeserializeObject<List<int>>((string)Application.Current.Properties["wishlist"]);
         }
     }
 }

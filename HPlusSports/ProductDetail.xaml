@@ -16,7 +16,7 @@
                             Clicked="HandleOrderClick"
                             HorizontalOptions="FillAndExpand"
                             ></Button>
-                    <Button Text="Favorite"
+                    <Button Text="+ Wishlist"
                             x:Name="favoriteBtn"
                             Clicked="HandleFavoriteClick"
                             ></Button>

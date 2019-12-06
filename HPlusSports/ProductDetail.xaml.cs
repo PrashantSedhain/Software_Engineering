@@ -15,6 +15,11 @@ namespace HPlusSports
         {
             InitializeComponent();
             BindingContext = product;
+
+            if (Services.ProductService.WishList.Contains(product.Id))
+            {
+                favoriteBtn.Text = "- Wishlist";
+            }
         }
 
         public void HandleOrderClick(object sender, EventArgs e)
@@ -24,13 +29,22 @@ namespace HPlusSports
                 new Services.Order { ProductName = p.Name, Quantity = 1 }));
         }
 
-        public void HandleFavoriteClick(object sender, EventArgs e)
+        public async void HandleFavoriteClick(object sender, EventArgs e)
         {
             Services.Product p = BindingContext as Services.Product;
 
-            // TODO: Add product to favorites.
+            if (!Services.ProductService.WishList.Contains(p.Id))
+            {
+                favoriteBtn.Text = "- Wishlist";
+                Services.ProductService.WishList.Add(p.Id);
+            }
+            else
+            {
+                favoriteBtn.Text = "+ Wishlist";
+                Services.ProductService.WishList.Remove(p.Id);
+            }
 
-            DisplayAlert("Added to Favorites", $"Added {p.Name} to favorites", "OK");
+            await Services.ProductService.SaveWishList();
         }
     }
 }
