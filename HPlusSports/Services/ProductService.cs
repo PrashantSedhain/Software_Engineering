@@ -22,8 +22,7 @@ namespace HPlusSports.Services
 
         static ProductService()
 		{
-			client = new HttpClient();
-			client.BaseAddress = new Uri("https://hplussport.com/api/");
+            client = new HttpClient { BaseAddress = new Uri("https://hplussport.com/api/") };
             WishList = new List<int>();
 
 		}
