@@ -27,22 +27,39 @@ namespace HPlusSports.Services
 
 		}
 
-        public static async Task<List<Product>> GetProductsAsync()
+        public static List<Product> GetProducts()
 		{
-            var productsRaw = await client.GetStringAsync("products/");
+            var productsRaw = client.GetStringAsync("products/").Result;
 
             var serializer = new JsonSerializer();
             using(var tReader = new StringReader(productsRaw))
             {
                 using(var jReader = new JsonTextReader(tReader))
                 {
-                    var products = serializer.Deserialize<List<Product>>(
-                        jReader);
+                    var products = serializer.Deserialize<List<Product>>(jReader);
 
                     return products;
                 }
             }
 		}
+
+        public static List<Product> GetWishListProducts()
+        {
+            var products = GetProducts();
+            var wishListProducts = new List<Product>();
+
+            
+            foreach (Product p in products)
+            {
+                if (WishList.Contains(p.Id))
+                {
+                    wishListProducts.Add(p);
+                }
+            }
+
+            return wishListProducts;
+
+        }
 
         public static async Task SaveWishList()
         {
