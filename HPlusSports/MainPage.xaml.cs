@@ -12,25 +12,26 @@ namespace HPlusSports
     // Learn more about making custom code visible in the Xamarin.Forms previewer
     // by visiting https://aka.ms/xamarinforms-previewer
     [DesignTimeVisible(false)]
-    public partial class MainPage : TabbedPage
+    public partial class MainPage : ContentPage
     {
+        public List<Product> Products { get; set; }
+
         public MainPage()
         {
             InitializeComponent();
+            Products = ProductService.GetProducts();
+            BindingContext = Products;
         }
 
         public void Item_Selected(object sender, SelectionChangedEventArgs e)
         {
-            Services.Product product =
-                e.CurrentSelection.First() as Services.Product;
+            Product product = e.CurrentSelection.First() as Product;
             Navigation.PushAsync(new ProductDetail(product));
         }
 
-        protected override async void OnAppearing()
+        public void HandleWishListClicked(object sender, EventArgs e)
         {
-            base.OnAppearing();
-            var products = await ProductService.GetProductsAsync();
-            BindingContext = products;
+            Navigation.PushAsync(new WishListPage());
         }
     }
 }
