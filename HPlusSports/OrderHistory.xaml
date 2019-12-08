@@ -9,29 +9,10 @@
             ItemsSource="{Binding}"
             CachingStrategy="RecycleElement">
 
-    <!--Built in Cells-->
-    <ListView.ItemTemplate>
-        <DataTemplate>
+        <ListView.ItemTemplate>
+            <DataTemplate>
                 <TextCell Text="{Binding Item1}" Detail="{Binding Item2, StringFormat='Quantity: {0}'}"/>
-        </DataTemplate>
-    </ListView.ItemTemplate>
-    
-    <!--Custom View Cells-->
-    <!--
-    <ListView.ItemTemplate>
-      <DataTemplate>
-        <ViewCell>
-          <StackLayout>
-            <Label Text="{Binding Text}" 
-                   d:Text="{Binding .}"
-                   Style="{DynamicResource ListItemTextStyle}" />
-            <Label Text="{Binding Detail}" 
-                   d:Text="Detail"
-                   Style="{DynamicResource ListItemDetailTextStyle}"/>
-          </StackLayout>
-        </ViewCell>
-      </DataTemplate>
-    </ListView.ItemTemplate>
-    -->
-  </ListView>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
 </ContentPage>
