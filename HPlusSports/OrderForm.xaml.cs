@@ -6,7 +6,7 @@ using Xamarin.Forms;
 
 namespace HPlusSports
 {
-    public partial class OrderForm : TabbedPage
+    public partial class OrderForm : ContentPage
     {
         public OrderForm()
         {
