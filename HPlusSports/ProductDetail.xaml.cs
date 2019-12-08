@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HPlusSports.Services;
+using System;
 using System.Collections.Generic;
 
 using Xamarin.Forms;
@@ -20,6 +21,11 @@ namespace HPlusSports
             {
                 favoriteBtn.Text = "- Wishlist";
             }
+
+            if (!ProductService.OrderHistory.ContainsKey(product.Id))
+            {
+                historyBtn.IsEnabled = false;
+            }
         }
 
         public void HandleOrderClick(object sender, EventArgs e)
@@ -27,6 +33,12 @@ namespace HPlusSports
             Services.Product p = BindingContext as Services.Product;
             Navigation.PushAsync(new OrderForm(
                 new Services.Order { Product = p, Quantity = 1 }));
+        }
+
+        public void HandleHistoryClick(object sender, EventArgs e)
+        {
+            Product p = BindingContext as Product;
+            Navigation.PushAsync(new OrderHistory(p));
         }
 
         public async void HandleFavoriteClick(object sender, EventArgs e)
