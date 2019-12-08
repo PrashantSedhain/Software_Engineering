@@ -26,9 +26,9 @@ namespace HPlusSports
             o.Quantity = Int32.Parse(QuantityStepper.Text);
             if (!ProductService.OrderHistory.ContainsKey(o.Product.Id))
             {
-                ProductService.OrderHistory.Add(o.Product.Id, new List<ValueTuple<DateTime, int>>());
+                ProductService.OrderHistory.Add(o.Product.Id, new List<Tuple<DateTime, int>>());
             }
-            ProductService.OrderHistory[o.Product.Id].Add((o.Time, o.Quantity));
+            ProductService.OrderHistory[o.Product.Id].Add(new Tuple<DateTime, int>(o.Time, o.Quantity));
             await ProductService.SaveOrderHistory();
             
             await DisplayAlert("Order Placed", $"Order placed for {o.Quantity} of {o.Product.Name}", "OK");

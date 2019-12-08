@@ -20,13 +20,13 @@ namespace HPlusSports.Services
             set;
         }
 
-        public static Dictionary<int, List<ValueTuple<DateTime, int>>> OrderHistory { get; set; }
+        public static Dictionary<int, List<Tuple<DateTime, int>>> OrderHistory { get; set; }
 
         static ProductService()
 		{
             client = new HttpClient { BaseAddress = new Uri("https://hplussport.com/api/") };
             WishList = new List<int>();
-            OrderHistory = new Dictionary<int, List<ValueTuple<DateTime, int>>>();
+            OrderHistory = new Dictionary<int, List<Tuple<DateTime, int>>>();
 		}
 
         public static List<Product> GetProducts()
@@ -85,7 +85,7 @@ namespace HPlusSports.Services
 
         public static async Task LoadOrderHistory()
         {
-            OrderHistory = JsonConvert.DeserializeObject<Dictionary<int, List<ValueTuple<DateTime, int>>>>((string)Application.Current.Properties["order_history"]);
+            OrderHistory = JsonConvert.DeserializeObject<Dictionary<int, List<Tuple<DateTime, int>>>>((string)Application.Current.Properties["order_history"]);
         }
     }
 }
