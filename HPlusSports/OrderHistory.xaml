@@ -12,7 +12,7 @@
     <!--Built in Cells-->
     <ListView.ItemTemplate>
         <DataTemplate>
-                <TextCell Text="{Binding Item1}" Detail="Quantity: {Binding Item2}"/>
+                <TextCell Text="{Binding Item1}" Detail="{Binding Item2, StringFormat='Quantity: {0}'}"/>
         </DataTemplate>
     </ListView.ItemTemplate>
     
