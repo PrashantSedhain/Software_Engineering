@@ -22,7 +22,8 @@ namespace HPlusSports
 
             Items = new ObservableCollection<Tuple<DateTime, int>>(ProductService.OrderHistory[p.Id]);
 
-            MyListView.ItemsSource = Items;
+            HistoryListView.ItemsSource = Items;
+            ProductLabel.Text = p.Name;
         }
     }
 }
