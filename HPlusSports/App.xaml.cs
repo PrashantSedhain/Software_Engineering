@@ -17,17 +17,20 @@ namespace HPlusSports
         {
             // Handle when your app starts
             Services.ProductService.LoadWishList();
+            Services.ProductService.LoadOrderHistory();
         }
 
         protected override void OnSleep()
         {
             // Handle when your app sleeps
             Services.ProductService.SaveWishList();
+            Services.ProductService.SaveOrderHistory();
         }
 
         protected override void OnResume()
         {
             Services.ProductService.LoadWishList();
+            Services.ProductService.LoadOrderHistory();
         }
     }
 }

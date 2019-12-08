@@ -7,13 +7,12 @@ namespace HPlusSports.Services
     {
         public Order()
         {
+            Time = DateTime.Now;
         }
 
-        public string ProductName
-        {
-            get;
-            set;
-        }
+        public Product Product { get; set; }
+
+        public DateTime Time { get; set; }
 
         private int qty;
 

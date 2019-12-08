@@ -26,7 +26,7 @@ namespace HPlusSports
         {
             Services.Product p = BindingContext as Services.Product;
             Navigation.PushAsync(new OrderForm(
-                new Services.Order { ProductName = p.Name, Quantity = 1 }));
+                new Services.Order { Product = p, Quantity = 1 }));
         }
 
         public async void HandleFavoriteClick(object sender, EventArgs e)

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<TabbedPage Title="{Binding Path=ProductName}" xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="HPlusSports.OrderForm">
+<TabbedPage Title="{Binding Path=Product.Name}" xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="HPlusSports.OrderForm">
     <TabbedPage.Resources>
         <ResourceDictionary>
             <Style TargetType="Entry">
@@ -19,10 +19,10 @@
     <TabbedPage.Children>
         <ContentPage Title="Order">
             <StackLayout Orientation="Vertical" Padding="10,20" VerticalOptions="Start">
-                <Label Text="{Binding Path=ProductName}" FontSize="Large"></Label>
+                <Label Text="{Binding Path=Product.Name}" FontSize="Large"></Label>
                 <StackLayout Orientation="Horizontal">
                     <Label Text="Quantity:" VerticalOptions="Center"></Label>
-                    <Entry Text="{Binding Path=Quantity,Mode=TwoWay}" Placeholder="Quantity" Keyboard="Numeric" HorizontalOptions="FillAndExpand"></Entry>
+                    <Entry Text="{Binding Path=Quantity,Mode=TwoWay}" Placeholder="Quantity" Keyboard="Numeric" HorizontalOptions="FillAndExpand" x:Name="QuantityStepper"></Entry>
                     <Stepper Value="{Binding Path=Quantity,Mode=TwoWay}" Minimum="1"></Stepper>
                 </StackLayout>
                 <Button Text="Order" Clicked="Handle_Clicked" HorizontalOptions="FillAndExpand"></Button>

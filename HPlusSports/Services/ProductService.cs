@@ -10,7 +10,7 @@ using Xamarin.Forms;
 
 namespace HPlusSports.Services
 {
-	public static class ProductService
+    public static class ProductService
     {
         static HttpClient client;
 
@@ -20,11 +20,13 @@ namespace HPlusSports.Services
             set;
         }
 
+        public static Dictionary<int, List<ValueTuple<DateTime, int>>> OrderHistory { get; set; }
+
         static ProductService()
 		{
             client = new HttpClient { BaseAddress = new Uri("https://hplussport.com/api/") };
             WishList = new List<int>();
-
+            OrderHistory = new Dictionary<int, List<ValueTuple<DateTime, int>>>();
 		}
 
         public static List<Product> GetProducts()
@@ -73,6 +75,17 @@ namespace HPlusSports.Services
         public static async Task LoadWishList()
         {
             WishList = JsonConvert.DeserializeObject<List<int>>((string)Application.Current.Properties["wishlist"]);
+        }
+
+        public static async Task SaveOrderHistory()
+        {
+            Application.Current.Properties["order_history"] = JsonConvert.SerializeObject(OrderHistory);
+            await Application.Current.SavePropertiesAsync();
+        }
+
+        public static async Task LoadOrderHistory()
+        {
+            OrderHistory = JsonConvert.DeserializeObject<Dictionary<int, List<ValueTuple<DateTime, int>>>>((string)Application.Current.Properties["order_history"]);
         }
     }
 }
