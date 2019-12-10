@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ContentPage
+<ContentPage NavigationPage.HasNavigationBar="True"
     Title="All Products"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
@@ -8,7 +8,10 @@
     mc:Ignorable="d"
     x:Class="HPlusSports.MainPage">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Wishlist" Clicked="HandleWishListClicked"/>
+        <ToolbarItem Text="My Cart" Order="Secondary"/>
+        <ToolbarItem Text="Wishlist" Clicked="HandleWishListClicked" Order="Secondary"/>
+        <ToolbarItem Text="Order History" Order="Secondary"/>
+        <ToolbarItem Text="About" Order="Secondary"/>
     </ContentPage.ToolbarItems>
     <CollectionView ItemsSource="{Binding}" SelectionMode="Single" SelectionChanged="Item_Selected">
         <CollectionView.ItemsLayout>
