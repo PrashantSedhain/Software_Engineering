@@ -29,7 +29,7 @@ namespace HPlusSports.Services
             OrderHistory = new Dictionary<int, List<Tuple<DateTime, int>>>();
 		}
 
-        public static async Task<List<Product>> GetProductsAsync()
+        public static async Task<List<Product>> GetProductsAsync(bool GetPrices=false)
 		{
             var productsRaw = Client.GetStringAsync("products/").Result;
 
@@ -39,7 +39,10 @@ namespace HPlusSports.Services
                 using(var jReader = new JsonTextReader(tReader))
                 {
                     var products = serializer.Deserialize<List<Product>>(jReader);
-                    await SetProductPrices(products);
+                    if (GetPrices)
+                    {
+                        await SetProductPrices(products);
+                    }
                     return products;
                 }
             }
