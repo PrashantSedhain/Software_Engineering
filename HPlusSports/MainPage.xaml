@@ -8,10 +8,7 @@
     mc:Ignorable="d"
     x:Class="HPlusSports.MainPage">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="My Cart" Order="Secondary"/>
         <ToolbarItem Text="Wishlist" Clicked="HandleWishListClicked" Order="Secondary"/>
-        <ToolbarItem Text="Order History" Order="Secondary"/>
-        <ToolbarItem Text="About" Order="Secondary"/>
     </ContentPage.ToolbarItems>
     <CollectionView ItemsSource="{Binding}" SelectionMode="Single" SelectionChanged="Item_Selected">
         <CollectionView.ItemsLayout>
