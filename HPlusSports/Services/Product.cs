@@ -30,6 +30,12 @@ namespace HPlusSports.Services
 			set;
 		}
 
+		public double Price
+		{
+			get;
+			set;
+		}
+
         public Uri ImageUri
         {
             get

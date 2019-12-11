@@ -12,7 +12,7 @@ namespace HPlusSports.Services
 {
     public static class ProductService
     {
-        static HttpClient client;
+        static HttpClient Client;
 
         public static List<int> WishList
         {
@@ -24,14 +24,14 @@ namespace HPlusSports.Services
 
         static ProductService()
 		{
-            client = new HttpClient { BaseAddress = new Uri("https://hplussport.com/api/") };
+            Client = new HttpClient { BaseAddress = new Uri("https://hplussport.com/api/") };
             WishList = new List<int>();
             OrderHistory = new Dictionary<int, List<Tuple<DateTime, int>>>();
 		}
 
-        public static List<Product> GetProducts()
+        public static async Task<List<Product>> GetProductsAsync()
 		{
-            var productsRaw = client.GetStringAsync("products/").Result;
+            var productsRaw = Client.GetStringAsync("products/").Result;
 
             var serializer = new JsonSerializer();
             using(var tReader = new StringReader(productsRaw))
@@ -39,15 +39,23 @@ namespace HPlusSports.Services
                 using(var jReader = new JsonTextReader(tReader))
                 {
                     var products = serializer.Deserialize<List<Product>>(jReader);
-
+                    await SetProductPrices(products);
                     return products;
                 }
             }
 		}
 
+        private static async Task SetProductPrices(List<Product> products)
+        {
+            foreach (Product p in products)
+            {
+                p.Price = GetProductPrice(p.Id);
+            }
+        }
+
         public static List<Product> GetWishListProducts()
         {
-            var products = GetProducts();
+            var products = GetProductsAsync().Result;
             var wishListProducts = new List<Product>();
 
             
@@ -86,6 +94,14 @@ namespace HPlusSports.Services
         public static async Task LoadOrderHistory()
         {
             OrderHistory = JsonConvert.DeserializeObject<Dictionary<int, List<Tuple<DateTime, int>>>>((string)Application.Current.Properties["order_history"]);
+        }
+
+        public static double GetProductPrice(int Id)
+        {
+            var productsRaw = Client.GetStringAsync("products/id/" + Id).Result;
+            var products = JsonConvert.DeserializeObject<List<Dictionary<string, string>>>(productsRaw);
+
+            return Double.Parse(products[0]["price"]);
         }
     }
 }
