@@ -26,6 +26,7 @@
                             ></Button>
                 </StackLayout>
                 <StackLayout Orientation="Vertical">
+                    <Label Text="{Binding Price, StringFormat='{0:c}'}" FontSize="Large"></Label>
                     <Label Text="{Binding Description}" FontSize="Medium"></Label>
                 </StackLayout>
             </StackLayout>
