@@ -19,7 +19,7 @@ namespace HPlusSports
         public MainPage()
         {
             InitializeComponent();
-            Products = ProductService.GetProductsAsync().Result;
+            Products = ProductService.GetProductsAsync(true).Result;
             BindingContext = Products;
         }
 
